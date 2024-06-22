@@ -2,9 +2,11 @@ package com.ridham.userProfile;
 
 import com.ridham.userProfile.dao.UserDao;
 import com.ridham.userProfile.entities.User;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class UserProfileApplication {
@@ -24,6 +26,11 @@ public class UserProfileApplication {
 		User user2 = new User(2, "Ritika","Dattatraya", "Bhandari", "15-11-2002", 21, 'F',"NTD");
 		savedUser = userDao.save(user2);
 		System.out.println(savedUser.toString());
+	}
+
+	@Bean
+	public ModelMapper getModelMapper(){
+		return new ModelMapper();
 	}
 
 }
