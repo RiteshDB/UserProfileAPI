@@ -1,17 +1,19 @@
 package com.ridham.userProfile.service;
 
 import com.ridham.userProfile.entities.User;
-
-import java.util.List;
-import java.util.Optional;
+import com.ridham.userProfile.exception.RecordNotFoundException;
 
 public interface IUserService {
 
-     User addUser(User user);
-     Optional<User> getUserById(int id);
-    List<User> getUserByName(String name);
-    List<User> getUserByFirstNameLastName(String firstName, String lastName);
-     List<User> getAllUsers();
+    User addUser(User user);
 
-     User updateUser(User user);
+    User getUserById(int id) throws RecordNotFoundException;
+
+    User getUserByName(String name);
+    /*List<User> getUserByFirstNameLastName(String firstName, String lastName);
+     List<User> getAllUsers();*/
+
+    User updateUser(User user);
+
+    User delete(User user);
 }
