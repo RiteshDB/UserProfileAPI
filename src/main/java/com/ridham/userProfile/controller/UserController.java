@@ -1,13 +1,18 @@
 package com.ridham.userProfile.controller;
 
 import com.ridham.userProfile.dto.UserDTO;
+import com.ridham.userProfile.entities.ErrorMessage;
 import com.ridham.userProfile.entities.User;
+import com.ridham.userProfile.exception.RecordNotFoundException;
 import com.ridham.userProfile.service.UserService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+
+import java.util.Date;
 
 @RestController
 
@@ -61,5 +66,14 @@ public class UserController {
         return new ResponseEntity(userUpd, HttpStatus.OK);
     }
 
+    @ExceptionHandler(value = RecordNotFoundException.class)
+    public ResponseEntity<ErrorMessage>  recordNotFoundExceptionHandler(RecordNotFoundException ex, WebRequest req){
+        ErrorMessage message = new ErrorMessage(
+                HttpStatus.NOT_FOUND.value(),
+                new Date(),
+                ex.getMessage(),
+                req.getDescription(false));
+        return new ResponseEntity<ErrorMessage>(message, HttpStatus.NOT_FOUND);
+    }
 
 }

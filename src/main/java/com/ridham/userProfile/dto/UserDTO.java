@@ -1,8 +1,7 @@
 package com.ridham.userProfile.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
-import org.springframework.stereotype.Component;
+
 
 public class UserDTO {
     private int id;
